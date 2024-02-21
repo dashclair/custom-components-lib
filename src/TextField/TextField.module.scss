@@ -1,0 +1,104 @@
+.containerInput {
+    background-color: white;
+    border-radius: 4px;
+    position: relative;
+    height: 50px;
+    font-family: Arial, sans-serif;
+}
+
+.input {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    background: transparent;
+    border: 1px solid transparent;
+    border-bottom-color: #0000006b;
+    color: rgba(0, 0, 0, 0.87);
+    padding: 15px 10px 5px;
+    font-size: 1rem;
+
+    &:focus,
+    &:hover {
+        outline: none;
+        border-bottom-width: 2px;
+        border-bottom-color: #5a76da;
+    }
+
+    &_error,
+    &_error:focus {
+        border-bottom-color: #c42d2d;
+    }
+}
+
+.label {
+    position: absolute;
+    top: 50%;
+    left: 16px;
+    transform: translateY(-50%);
+    color: rgba(0, 0, 0, 0.5);
+    padding: 1px;
+}
+
+.input_error ~ .label {
+    color: #c42d2d;
+}
+
+.input:focus ~ label {
+    color: #5a76da;
+}
+
+.input_error:focus ~ label {
+    color: #c42d2d;
+}
+
+.input:not(:placeholder-shown) ~ label,
+.input:focus ~ label {
+    top: 0px;
+    left: 10px;
+    font-size: 0.75rem;
+    background-color: white;
+}
+
+.outlined {
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    border-radius: 4px;
+
+    &:focus,
+    &:hover {
+        border: 1px solid #5a76da;
+    }
+
+    &__error,
+    &_error:focus,
+    &_error:hover {
+        border-color: #c42d2d;
+    }
+}
+
+.outlined_error ~ label,
+.outlined_error:focus ~ label {
+    color: #c42d2d;
+}
+
+.filled {
+    border-radius: 4px;
+    background-color: #f5f5f5;
+
+    &_error,
+    &:focus {
+        border-bottom-color: #c42d2d;
+    }
+}
+
+.filled:not(:placeholder-shown) ~ label,
+.filled:focus ~ label {
+    top: 10px;
+    left: 10px;
+    font-size: 0.75rem;
+    background-color: transparent;
+}
+
+.filled_error:not(:placeholder-shown) ~ label,
+.filled_error:focus ~ label {
+    color: #c42d2d;
+}

@@ -1,0 +1,46 @@
+.button {
+    cursor: pointer;
+    font-weight: 540;
+    border-radius: 7px;
+    padding: 10px;
+    
+    &:active {
+        background-color: #97a7e2;
+        color: white;
+    }
+    &:disabled {
+        background-color: lightgrey;
+        color: gray;
+        border-color: lightgrey;
+    }
+}
+
+.small {
+    font-size: small;
+}
+
+.medium {
+    font-size: medium;
+}
+
+.large {
+    font-size: large;
+}
+
+.text {
+    border: 0;
+    background: none;
+    color: #5a76da;
+}
+
+.outlined {
+    border: 1px solid #5a76da;
+    background: none;
+    color: #5a76da;
+}
+
+.contained {
+    background-color: #5a76da;
+    color: white;
+    border: 0;
+}

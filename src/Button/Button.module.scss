@@ -3,17 +3,16 @@
     font-weight: 540;
     border-radius: 7px;
     padding: 10px;
-}
-
-.button:active {
-    background-color: #97a7e2;
-    color: white;
-}
-
-.button:disabled {
-    background-color: lightgrey;
-    color: gray;
-    border-color: lightgrey;
+    
+    &:active {
+        background-color: #97a7e2;
+        color: white;
+    }
+    &:disabled {
+        background-color: lightgrey;
+        color: gray;
+        border-color: lightgrey;
+    }
 }
 
 .small {

@@ -1,5 +1,5 @@
 import React from "react";
-import inputStyles from "./TextField.module.css";
+import inputStyles from "./TextField.module.scss";
 import { TextFieldTypes } from "./TextField.types";
 
 const TextField = ({

@@ -3,6 +3,7 @@
     border-radius: 4px;
     position: relative;
     height: 50px;
+    display: flex;
     font-family: Arial, sans-serif;
 }
 
@@ -68,12 +69,22 @@
         border: 1px solid #5a76da;
     }
 
-    &__error,
+    &_error,
     &_error:focus,
     &_error:hover {
         border-color: #c42d2d;
     }
+
+    &_select {
+        border-color: #5a76da;
+    }
+
+    &_select ~ label {
+        color: #5a76da;
+    }
 }
+
+
 
 .outlined_error ~ label,
 .outlined_error:focus ~ label {

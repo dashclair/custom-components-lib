@@ -3,6 +3,7 @@ import inputStyles from "./TextField.module.scss";
 import { TextFieldTypes } from "./TextField.types";
 
 const TextField = ({
+    children,
     id,
     variant = "standart",
     label,
@@ -12,6 +13,7 @@ const TextField = ({
     error,
     disabled,
     required,
+    select,
     onBlur,
     onChange,
     ...props
@@ -26,14 +28,18 @@ const TextField = ({
         }
     };
 
+    const selectStyles = select && inputStyles.outlined_select;
+
     const errorStyle = handleErrorStyle();
 
     return (
-        <div className={`${inputStyles.containerInput} ${className ?? ""}`}>
+        <div
+            className={`${inputStyles.containerInput} ${className ?? ""}`} 
+        >
             <input
                 className={`${inputStyles.input} ${
                     variant !== "standart" && inputStyles[`${variant}`]
-                } ${errorStyle}`}
+                } ${errorStyle} ${selectStyles} `}
                 value={value}
                 id={id}
                 type={type}
@@ -47,6 +53,7 @@ const TextField = ({
             <label className={inputStyles.label} htmlFor={id}>
                 {label}
             </label>
+            {children}
         </div>
     );
 };

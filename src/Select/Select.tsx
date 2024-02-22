@@ -3,7 +3,7 @@ import TextField from "../TextField/TextField";
 import selectStyles from "./Select.module.scss";
 import { SelectProps } from "./Select.types";
 import Button from "../Button/Button";
-import arrow from './Vector.svg';
+import Arrow from "./Arrow";
 
 const Select = ({
     label,
@@ -11,7 +11,6 @@ const Select = ({
     defaultValue = "",
     selectError,
 }: SelectProps) => {
-    
     const [open, setOpen] = useState(false);
     const [selectedItem, setSelectedItem] = useState(defaultValue);
 
@@ -37,7 +36,7 @@ const Select = ({
                     onClick={handleOpen}
                     className={selectStyles.selectButton}
                 >
-                    <img src={arrow} className={open ? selectStyles.arrowRotate : ''}/>
+                    <Arrow className={open ? selectStyles.arrowRotate : ""} />
                 </button>
             </div>
             <div

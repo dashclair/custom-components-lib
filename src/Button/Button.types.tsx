@@ -1,6 +1,7 @@
 import{ ReactNode } from 'react';
 
 export interface ButtonProps {
+    select?: boolean;
     children?:ReactNode | string;
     className?:string;
     variant?: 'text' | 'contained' | 'outlined';

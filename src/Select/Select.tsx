@@ -4,6 +4,9 @@ import selectStyles from "./Select.module.scss";
 import { SelectProps } from "./Select.types";
 import Button from "../Button/Button";
 import Arrow from "./Arrow";
+import cnBind from "classnames/bind";
+
+const cx = cnBind.bind(selectStyles);
 
 const Select = ({
     label,
@@ -14,12 +17,20 @@ const Select = ({
     const [open, setOpen] = useState(false);
     const [selectedItem, setSelectedItem] = useState(defaultValue);
 
+    const arrow = cx({
+        arrowRotate: open,
+    });
+
     const handleOpen = () => {
         if (!selectedItem) {
             setSelectedItem(" ");
         }
         setOpen(!open);
     };
+
+    const optionsContainer = cx("optionsContainer", {
+        none: !open,
+    });
 
     return (
         <div className={selectStyles.select}>
@@ -36,16 +47,10 @@ const Select = ({
                     onClick={handleOpen}
                     className={selectStyles.selectButton}
                 >
-                    <Arrow className={open ? selectStyles.arrowRotate : ""} />
+                    <Arrow className={arrow} />
                 </button>
             </div>
-            <div
-                className={
-                    open
-                        ? selectStyles.optionsContainer
-                        : selectStyles.optionsContainer_none
-                }
-            >
+            <div className={optionsContainer}>
                 {open &&
                     Array.isArray(options) &&
                     options.map((option) => {

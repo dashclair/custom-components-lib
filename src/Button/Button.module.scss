@@ -3,48 +3,72 @@
     font-weight: 540;
     border-radius: 7px;
     padding: 10px;
-    
-    &:active {
-        background-color: #97a7e2;
+
+    &.small {
+        font-size: small;
+    }
+
+    &.medium {
+        font-size: medium;
+    }
+
+    &.large {
+        font-size: large;
+    }
+
+    &.text {
+        border: 0;
+        background: none;
+        color: #5a76da;
+
+        &:active {
+            background-color: #97a7e2;
+            color: white;
+        }
+
+        &.disabled {
+            color: gray;
+        }
+    }
+
+    &.text_select {
+        color: black;
+        
+        &:hover{
+            background-color: aliceblue;
+        }
+    }
+
+    &.outlined {
+        border: 1px solid #5a76da;
+        background: none;
+        color: #5a76da;
+
+        &:active {
+            background-color: #97a7e2;
+            color: white;
+        }
+
+        &.disabled {
+            color: gray;
+            border-color: lightgrey;
+        }
+    }
+
+    &.contained {
+        background-color: #5a76da;
         color: white;
+        border: 0;
+
+        &:active {
+            background-color: #97a7e2;
+            color: white;
+        }
+
+        &.disabled {
+            background-color: lightgrey;
+            color: gray;
+            border-color: lightgrey;
+        }
     }
-    &:disabled {
-        background-color: lightgrey;
-        color: gray;
-        border-color: lightgrey;
-    }
-}
-
-.small {
-    font-size: small;
-}
-
-.medium {
-    font-size: medium;
-}
-
-.large {
-    font-size: large;
-}
-
-.text {
-    border: 0;
-    background: none;
-    color: #5a76da;
-}
-
-.text_select {
-    color: black;
-}
-
-.outlined {
-    border: 1px solid #5a76da;
-    background: none;
-    color: #5a76da;
-}
-
-.contained {
-    background-color: #5a76da;
-    color: white;
-    border: 0;
 }

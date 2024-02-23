@@ -1,6 +1,11 @@
 import React from "react";
 import buttonStyles from "./Button.module.scss";
 import { ButtonProps } from "./Button.types";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import cn from "classnames";
+import cnBind from "classnames/bind";
+
+const cx = cnBind.bind(buttonStyles);
 
 const Button = ({
     select,
@@ -12,22 +17,22 @@ const Button = ({
     size = "medium",
     ...props
 }: ButtonProps) => {
-    
-    const checkingTypes = (value: string) => {
-        return buttonStyles[value];
-    };
-
-    const typeVariant = checkingTypes(variant);
-    const typeSize = checkingTypes(size);
+    const btn = cx("button", {
+        disabled: isDisabled,
+        small: size === "small",
+        medium: size === "medium",
+        large: size === "large",
+        text: variant === "text",
+        outlined: variant === "outlined",
+        contained: variant === "contained",
+        text_select: select,
+    });
 
     const stringCheck = typeof children == "string" && !select;
-    const selectStyles = select && buttonStyles.text_select
 
     return (
         <button
-            className={`${buttonStyles.button} ${typeVariant} ${typeSize} ${selectStyles} ${
-                className ?? ""
-            }`}
+            className={`${btn} ${className ?? ""}`}
             disabled={isDisabled}
             onClick={onClick}
             {...props}

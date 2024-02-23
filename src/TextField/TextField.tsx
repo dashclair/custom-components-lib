@@ -1,6 +1,9 @@
 import React from "react";
 import inputStyles from "./TextField.module.scss";
 import { TextFieldTypes } from "./TextField.types";
+import classNames from "classnames/bind";
+
+const cx = classNames.bind(inputStyles);
 
 const TextField = ({
     children,
@@ -18,28 +21,18 @@ const TextField = ({
     onChange,
     ...props
 }: Partial<TextFieldTypes>) => {
-    const handleErrorStyle = () => {
-        if (error && variant !== "standart") {
-            return `${inputStyles[`${variant}_error`]}`;
-        }
-
-        if (error && variant === "standart") {
-            return inputStyles.input_error;
-        }
-    };
-
-    const selectStyles = select && inputStyles.outlined_select;
-
-    const errorStyle = handleErrorStyle();
+    
+    const inputStyle = cx("input", {
+        outlined: variant === "outlined",
+        filled: variant === "filled",
+        error: error,
+        select: select,
+    });
 
     return (
-        <div
-            className={`${inputStyles.containerInput} ${className ?? ""}`} 
-        >
+        <div className={`${inputStyles.containerInput}`}>
             <input
-                className={`${inputStyles.input} ${
-                    variant !== "standart" && inputStyles[`${variant}`]
-                } ${errorStyle} ${selectStyles} `}
+                className={`${inputStyle} ${className ?? ""}`}
                 value={value}
                 id={id}
                 type={type}

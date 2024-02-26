@@ -1,9 +1,9 @@
 import React from "react";
-import buttonStyles from "./Button.module.scss";
+import styles from "./Button.module.scss";
 import { ButtonProps } from "./Button.types";
 import cnBind from "classnames/bind";
 
-const cx = cnBind.bind(buttonStyles);
+const cx = cnBind.bind(styles);
 
 const Button = ({
     capitalized = true,

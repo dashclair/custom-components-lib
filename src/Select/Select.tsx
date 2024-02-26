@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import TextField from "../TextField/TextField";
-import selectStyles from "./Select.module.scss";
+import styles from "./Select.module.scss";
 import { SelectProps } from "./Select.types";
 import Button from "../Button/Button";
 import Arrow from "./Arrow";
 import cnBind from "classnames/bind";
 
-const cx = cnBind.bind(selectStyles);
+const cx = cnBind.bind(styles);
 
 const Select = ({
     label,
@@ -33,20 +33,17 @@ const Select = ({
     });
 
     return (
-        <div className={selectStyles.select}>
-            <div className={selectStyles.selectContainer}>
+        <div className={styles.select}>
+            <div className={styles.selectContainer}>
                 <TextField
                     value={selectedItem}
                     variant="outlined"
                     select={open}
                     label={label}
                     error={selectError}
-                    className={selectStyles.input}
+                    className={styles.input}
                 />
-                <button
-                    onClick={handleOpen}
-                    className={selectStyles.selectButton}
-                >
+                <button onClick={handleOpen} className={styles.selectButton}>
                     <Arrow className={arrow} />
                 </button>
             </div>
@@ -58,7 +55,7 @@ const Select = ({
                             <Button
                                 key={option}
                                 capitalized={false}
-                                className={selectStyles.optionButton}
+                                className={styles.optionButton}
                                 variant="text"
                                 onClick={() => {
                                     setSelectedItem(option);

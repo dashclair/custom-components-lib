@@ -1,11 +1,11 @@
 import React from "react";
-import { SwitchTypes } from "./Switch.types";
+import { SwitchProps } from "./Switch.types";
 import switchStyles from "./Switch.module.scss";
 import cnBind from "classnames/bind";
 
 const cx = cnBind.bind(switchStyles);
 
-const Switch = ({ id, checked, onChange, disabled }: SwitchTypes) => {
+const Switch = ({ id, checked, onChange, disabled }: SwitchProps) => {
     const inputStyles = cx("input", {
         disabled: disabled,
     });

@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./Checkbox.module.scss";
-import { CheckboxTypes } from "./Checkbox.types";
+import { CheckboxProps } from "./Checkbox.types";
 import cnBind from "classnames/bind";
 
 const cx = cnBind.bind(styles);
@@ -11,7 +11,7 @@ const Checkbox = ({
     disabled,
     size = "small",
     onChange,
-}: CheckboxTypes) => {
+}: CheckboxProps) => {
     const checkboxStyle = cx("input", {
         small: size === "small",
         medium: size === "medium",

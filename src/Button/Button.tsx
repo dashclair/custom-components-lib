@@ -1,8 +1,6 @@
 import React from "react";
 import buttonStyles from "./Button.module.scss";
 import { ButtonProps } from "./Button.types";
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import cn from "classnames";
 import cnBind from "classnames/bind";
 
 const cx = cnBind.bind(buttonStyles);

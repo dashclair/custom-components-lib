@@ -17,7 +17,7 @@ const Button = ({
     size = "medium",
     ...props
 }: ButtonProps) => {
-    const btn = cx("button", {
+    const btn = cx("button", className, {
         disabled: isDisabled,
         small: size === "small",
         medium: size === "medium",
@@ -32,7 +32,7 @@ const Button = ({
 
     return (
         <button
-            className={`${btn} ${className ?? ""}`}
+            className={btn}
             disabled={isDisabled}
             onClick={onClick}
             {...props}

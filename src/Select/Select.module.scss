@@ -45,5 +45,11 @@
     .optionButton {
         width: 100%;
         text-align: start;
+        color: black;
+
+        &:hover {
+            background-color: aliceblue;
+            color:black
+        }
     }
 }

@@ -57,13 +57,13 @@ const Select = ({
                         return (
                             <Button
                                 key={option}
+                                capitalized={false}
                                 className={selectStyles.optionButton}
                                 variant="text"
                                 onClick={() => {
                                     setSelectedItem(option);
                                     setOpen(!open);
                                 }}
-                                select
                             >
                                 {option}
                             </Button>

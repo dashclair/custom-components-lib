@@ -13,8 +13,8 @@ module.exports = {
     resolve: {
         extensions: [".ts", ".tsx"],
     },
-    externals:{
-        react:"react"
+    externals: {
+        react: "react",
     },
     plugins: [new MiniCssExtractPlugin()],
     module: {

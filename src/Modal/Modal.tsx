@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import stylesModal from "./Modal.modules.scss";
+import styles from "./Modal.modules.scss";
 import { ModalProps } from "./Modal.types";
 import CrossIcon from "./CrossIcon";
 
@@ -44,18 +44,18 @@ const Modal = ({
     return (
         <dialog
             ref={modalRef}
-            className={stylesModal.modal}
+            className={styles.modal}
             onKeyDown={handleKeyDown}
         >
             {hasCloseBtn && (
                 <button
-                    className={stylesModal.closeButton}
+                    className={styles.closeButton}
                     onClick={handleCloseModal}
                 >
-                    <CrossIcon className={stylesModal.cross} />
+                    <CrossIcon className={styles.cross} />
                 </button>
             )}
-            <h1 className={stylesModal.title}>{title}</h1>
+            <h1 className={styles.title}>{title}</h1>
             <p>{text}</p>
             {children}
         </dialog>

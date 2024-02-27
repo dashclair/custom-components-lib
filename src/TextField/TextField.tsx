@@ -1,9 +1,9 @@
 import React from "react";
-import inputStyles from "./TextField.module.scss";
-import { TextFieldTypes } from "./TextField.types";
+import styles from "./TextField.module.scss";
+import { TextFieldProps } from "./TextField.types";
 import classNames from "classnames/bind";
 
-const cx = classNames.bind(inputStyles);
+const cx = classNames.bind(styles);
 
 const TextField = ({
     children,
@@ -20,9 +20,8 @@ const TextField = ({
     onBlur,
     onChange,
     ...props
-}: Partial<TextFieldTypes>) => {
-    
-    const inputStyle = cx("input", {
+}: Partial<TextFieldProps>) => {
+    const inputStyle = cx("input", className, {
         outlined: variant === "outlined",
         filled: variant === "filled",
         error: error,
@@ -30,9 +29,9 @@ const TextField = ({
     });
 
     return (
-        <div className={`${inputStyles.containerInput}`}>
+        <div className={`${styles.containerInput}`}>
             <input
-                className={`${inputStyle} ${className ?? ""}`}
+                className={inputStyle}
                 value={value}
                 id={id}
                 type={type}
@@ -43,7 +42,7 @@ const TextField = ({
                 onChange={onChange}
                 {...props}
             ></input>
-            <label className={inputStyles.label} htmlFor={id}>
+            <label className={styles.label} htmlFor={id}>
                 {label}
             </label>
             {children}

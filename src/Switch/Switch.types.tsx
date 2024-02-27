@@ -1,4 +1,4 @@
-export interface SwitchTypes {
+export interface SwitchProps {
     id: string;
     checked?: boolean;
     disabled?: boolean;

@@ -1,14 +1,12 @@
 import React from "react";
-import buttonStyles from "./Button.module.scss";
+import styles from "./Button.module.scss";
 import { ButtonProps } from "./Button.types";
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import cn from "classnames";
 import cnBind from "classnames/bind";
 
-const cx = cnBind.bind(buttonStyles);
+const cx = cnBind.bind(styles);
 
 const Button = ({
-    select,
+    capitalized = true,
     children,
     onClick,
     className,
@@ -25,10 +23,12 @@ const Button = ({
         text: variant === "text",
         outlined: variant === "outlined",
         contained: variant === "contained",
-        text_select: select,
     });
 
-    const stringCheck = typeof children == "string" && !select;
+    const capitalizedLetters =
+        capitalized && typeof children === "string"
+            ? children.toUpperCase()
+            : children;
 
     return (
         <button
@@ -37,7 +37,7 @@ const Button = ({
             onClick={onClick}
             {...props}
         >
-            {stringCheck ? children.toUpperCase() : children}
+            {capitalizedLetters}
         </button>
     );
 };

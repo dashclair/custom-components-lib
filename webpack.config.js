@@ -35,6 +35,11 @@ module.exports = {
                 ],
             },
             {
+                test: /\.svg$/i,
+                issuer: /\.[jt]sx?$/,
+                use: [{ loader: "@svgr/webpack", options: { icon: true } }],
+            },
+            {
                 test: /\.(?:ico|gif|png|jpg|jpeg|svg)$/i,
                 type: "asset/resource",
             },

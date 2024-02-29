@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 import TextField from "../TextField/TextField";
 import styles from "./Select.module.scss";
 import { SelectProps } from "./Select.types";
@@ -13,10 +13,26 @@ const Select = ({
     options,
     defaultValue = "",
     selectError,
+    onChange,
 }: SelectProps) => {
     const [open, setOpen] = useState(false);
     const [selectedItem, setSelectedItem] = useState(defaultValue);
 
+    const handleSelectChange = (event: ChangeEvent<HTMLInputElement>) => {
+        const value = event.target.value;
+        setSelectedItem(value);
+    
+        if (onChange) {
+          onChange(value);
+        }
+        
+        if(options.includes(value)) {
+            setOpen(true)
+        }else {
+            setOpen(false)
+        }
+      };
+      
     const arrow = cx({
         arrowRotate: open,
     });
@@ -36,6 +52,7 @@ const Select = ({
         <div className={styles.select}>
             <div className={styles.selectContainer}>
                 <TextField
+                    onChange={handleSelectChange}
                     value={selectedItem}
                     variant="outlined"
                     select={open}

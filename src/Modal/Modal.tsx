@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import styles from "./Modal.modules.scss";
 import { ModalProps } from "./Modal.types";
 import IconComponent from "../components/Icon/IconComponent";
@@ -42,23 +43,28 @@ const Modal = ({
         }
     };
     return (
-        <dialog
-            ref={modalRef}
-            className={styles.modal}
-            onKeyDown={handleKeyDown}
-        >
-            {hasCloseBtn && (
-                <button
-                    className={styles.closeButton}
-                    onClick={handleCloseModal}
+        <>
+            {createPortal(
+                <dialog
+                    ref={modalRef}
+                    className={styles.modal}
+                    onKeyDown={handleKeyDown}
                 >
-                    <IconComponent iconName="cross" />
-                </button>
+                    {hasCloseBtn && (
+                        <button
+                            className={styles.closeButton}
+                            onClick={handleCloseModal}
+                        >
+                            <IconComponent iconName="cross" />
+                        </button>
+                    )}
+                    <h1 className={styles.title}>{title}</h1>
+                    <p>{text}</p>
+                    {children}
+                </dialog>,
+                document.body
             )}
-            <h1 className={styles.title}>{title}</h1>
-            <p>{text}</p>
-            {children}
-        </dialog>
+        </>
     );
 };
 

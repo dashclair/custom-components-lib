@@ -4,9 +4,8 @@ declare module "*.scss" {
 }
 
 declare module "*.svg" {
-    export const ReactComponent: React.FC<React.SVGProps<SVGSVGElement>>;
-    const src: string;
-    export default src;
+    const ReactComponent: React.FC<React.SVGProps<SVGSVGElement>>;
+    export default ReactComponent;
 }
 
-declare module "*.svg";
+declare module "react-dom";

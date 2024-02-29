@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ChangeEvent, ReactNode } from "react";
 
 export interface SelectProps {
     defaultValue?: string;
@@ -6,4 +6,5 @@ export interface SelectProps {
     label?: string;
     selectError?:boolean;
     options:string [];
+    onChange?:(event: ChangeEvent<HTMLInputElement> | string)=>void;
 }

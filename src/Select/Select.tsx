@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, ChangeEvent, useState } from "react";
 import { createPortal } from "react-dom";
 import TextField from "../TextField/TextField";
 import styles from "./Select.module.scss";
@@ -14,6 +14,7 @@ const Select = ({
     options,
     defaultValue = "",
     selectError,
+    onChange,
 }: SelectProps) => {
     const [open, setOpen] = useState(false);
     const [selectedItem, setSelectedItem] = useState(defaultValue);
@@ -33,6 +34,20 @@ const Select = ({
             divElement.style.left = `${inputRect.left}px`;
         }
     }, [inputRef]);
+    const handleSelectChange = (event: ChangeEvent<HTMLInputElement>) => {
+        const value = event.target.value;
+        setSelectedItem(value);
+    
+        if (onChange) {
+          onChange(value);
+        }
+        
+        if(options.includes(value)) {
+            setOpen(true)
+        }else {
+            setOpen(false)
+        }
+      };
 
     const handleOpen = () => {
         if (!selectedItem) {
@@ -54,6 +69,7 @@ const Select = ({
             <div className={styles.selectContainer}>
                 <TextField
                     inputRef={inputRef}
+                    onChange={handleSelectChange}
                     value={selectedItem}
                     variant="outlined"
                     select={open}

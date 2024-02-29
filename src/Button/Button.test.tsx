@@ -4,7 +4,7 @@ import { fireEvent, render } from "@testing-library/react";
 import Button from "./Button";
 
 describe("rendering button", () => {
-    test("renders the button with capitalized text", () => {
+    test("button with capitalized text", () => {
         const { getByRole } = render(<Button>button</Button>);
         const buttonElement = getByRole("button");
 
@@ -12,7 +12,7 @@ describe("rendering button", () => {
         expect(buttonElement).toHaveTextContent("BUTTON");
     });
 
-    test("renders the button text uncapitalized", () => {
+    test("button with uncapitalized text", () => {
         const { getByRole } = render(
             <Button capitalized={false}>button</Button>
         );
@@ -22,7 +22,7 @@ describe("rendering button", () => {
         expect(buttonElement).toHaveTextContent("button");
     });
 
-    test("renders with custom props", () => {
+    test("with custom props", () => {
         const onClickMock = jest.fn();
         const { getByRole } = render(
             <Button
@@ -42,12 +42,10 @@ describe("rendering button", () => {
 
         fireEvent.click(buttonElement);
 
-        console.log("Number of calls:", onClickMock.mock.calls.length);
-
         expect(onClickMock).toHaveBeenCalled();
     });
 
-    test("rendered disabled button", () => {
+    test("disabled button", () => {
         const onClickMock = jest.fn();
         const { getByRole } = render(
             <Button

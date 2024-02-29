@@ -4,7 +4,7 @@ import { render, fireEvent } from "@testing-library/react";
 import Switch from "./Switch";
 
 describe("Switch", () => {
-    test("renders with default props", () => {
+    test("default props", () => {
         const { getByRole } = render(<Switch id="mySwitch" />);
         const switchElement = getByRole("checkbox");
 
@@ -13,14 +13,10 @@ describe("Switch", () => {
         expect(switchElement).not.toBeDisabled();
     });
 
-    test("renders with custom props", () => {
+    test("custom props", () => {
         const onChangeMock = jest.fn();
         const { getByRole } = render(
-            <Switch
-                id="mySwitch"
-                checked={true}
-                onChange={onChangeMock}
-            />
+            <Switch id="mySwitch" checked={true} onChange={onChangeMock} />
         );
         const switchElement = getByRole("checkbox");
 
@@ -32,8 +28,8 @@ describe("Switch", () => {
 
         expect(onChangeMock).toHaveBeenCalled();
     });
-    
-    test("renders with custom disabled props", () => {
+
+    test("custom disabled props", () => {
         const onChangeMock = jest.fn();
         const { getByRole } = render(
             <Switch

@@ -4,7 +4,7 @@ import { fireEvent, render } from "@testing-library/react";
 import Checkbox from "./Checkbox";
 
 describe("checkbox", () => {
-    test("renders with default props", () => {
+    test("with default props", () => {
         const onChangeMock = jest.fn();
         const { getByLabelText } = render(
             <Checkbox label="label" onChange={onChangeMock} />
@@ -20,7 +20,7 @@ describe("checkbox", () => {
         expect(onChangeMock).toHaveBeenCalled();
     });
 
-    test("renders with custom props", () => {
+    test("with custom props", () => {
         const onChangeMock = jest.fn();
         const { getByLabelText } = render(
             <Checkbox

@@ -22,9 +22,13 @@ const Modal = ({
         const modalElement = modalRef.current;
         if (modalElement) {
             if (isModalOpen) {
-                modalElement.showModal();
+                if (typeof modalElement.showModal === "function") {
+                    modalElement.showModal();
+                }
             } else {
-                modalElement.close();
+                if (typeof modalElement.close === "function") {
+                    modalElement.close();
+                }
             }
         }
     }, [isModalOpen]);
@@ -49,6 +53,7 @@ const Modal = ({
         >
             {hasCloseBtn && (
                 <button
+                    data-testid='modal-button'
                     className={styles.closeButton}
                     onClick={handleCloseModal}
                 >

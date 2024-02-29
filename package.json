@@ -1,6 +1,6 @@
 {
   "name": "custom-components-lib-ui",
-  "version": "1.0.14",
+  "version": "1.0.17",
   "description": "",
   "main": "./dist/index.js",
   "scripts": {

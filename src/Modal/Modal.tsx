@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./Modal.modules.scss";
 import { ModalProps } from "./Modal.types";
-import CrossIcon from "./CrossIcon";
+import IconComponent from "../components/Icon/IconComponent";
 
 const Modal = ({
     children,
@@ -52,7 +52,7 @@ const Modal = ({
                     className={styles.closeButton}
                     onClick={handleCloseModal}
                 >
-                    <CrossIcon className={styles.cross} />
+                    <IconComponent iconName="cross" />
                 </button>
             )}
             <h1 className={styles.title}>{title}</h1>

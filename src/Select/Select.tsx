@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import TextField from "../TextField/TextField";
 import styles from "./Select.module.scss";
 import { SelectProps } from "./Select.types";
 import Button from "../Button/Button";
-import Arrow from "./Arrow";
+import IconComponent from "../components/Icon/IconComponent";
 import cnBind from "classnames/bind";
 
 const cx = cnBind.bind(styles);
@@ -16,10 +17,22 @@ const Select = ({
 }: SelectProps) => {
     const [open, setOpen] = useState(false);
     const [selectedItem, setSelectedItem] = useState(defaultValue);
+    const inputRef = useRef<HTMLInputElement>(null);
+    const divRef = useRef<HTMLDivElement>(null);
 
-    const arrow = cx({
-        arrowRotate: open,
-    });
+    useEffect(() => {
+        const inputElement = inputRef.current;
+        const divElement = divRef.current;
+
+        if (inputElement && divElement) {
+            const inputRect = inputElement.getBoundingClientRect();
+
+            divElement.style.position = "absolute";
+            divElement.style.width = `${inputRect.width}px`;
+            divElement.style.top = `${inputRect.bottom}px`;
+            divElement.style.left = `${inputRect.left}px`;
+        }
+    }, [inputRef]);
 
     const handleOpen = () => {
         if (!selectedItem) {
@@ -28,14 +41,19 @@ const Select = ({
         setOpen(!open);
     };
 
+    const arrow = cx({
+        arrowRotate: open,
+    });
+
     const optionsContainer = cx("optionsContainer", {
         none: !open,
     });
 
     return (
-        <div className={styles.select}>
+        <div id="select" className={styles.select}>
             <div className={styles.selectContainer}>
                 <TextField
+                    inputRef={inputRef}
                     value={selectedItem}
                     variant="outlined"
                     select={open}
@@ -44,29 +62,32 @@ const Select = ({
                     className={styles.input}
                 />
                 <button onClick={handleOpen} className={styles.selectButton}>
-                    <Arrow className={arrow} />
+                    <IconComponent iconName="arrow" className={arrow} />
                 </button>
             </div>
-            <div className={optionsContainer}>
-                {open &&
-                    Array.isArray(options) &&
-                    options.map((option) => {
-                        return (
-                            <Button
-                                key={option}
-                                capitalized={false}
-                                className={styles.optionButton}
-                                variant="text"
-                                onClick={() => {
-                                    setSelectedItem(option);
-                                    setOpen(!open);
-                                }}
-                            >
-                                {option}
-                            </Button>
-                        );
-                    })}
-            </div>
+            {createPortal(
+                <div ref={divRef} className={optionsContainer}>
+                    {open &&
+                        Array.isArray(options) &&
+                        options.map((option) => {
+                            return (
+                                <Button
+                                    key={option}
+                                    capitalized={false}
+                                    className={styles.optionButton}
+                                    variant="text"
+                                    onClick={() => {
+                                        setSelectedItem(option);
+                                        setOpen(!open);
+                                    }}
+                                >
+                                    {option}
+                                </Button>
+                            );
+                        })}
+                </div>,
+                document.body
+            )}
         </div>
     );
 };

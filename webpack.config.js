@@ -35,13 +35,29 @@ module.exports = {
                 ],
             },
             {
-                test: /\.svg$/i,
-                issuer: /\.[jt]sx?$/,
-                use: [{ loader: "@svgr/webpack", options: { icon: true } }],
+                test: /\.(?:ico|gif|png|jpg|jpeg)$/i,
+                type: "asset/resource",
             },
             {
-                test: /\.(?:ico|gif|png|jpg|jpeg|svg)$/i,
-                type: "asset/resource",
+                test: /\.svg$/i,
+                use: [
+                    {
+                        loader: "@svgr/webpack",
+                        options: {
+                            icon: true,
+                            svgoConfig: {
+                                plugins: [
+                                    {
+                                        name: "convertColors",
+                                        params: {
+                                            currentColor: true,
+                                        },
+                                    },
+                                ],
+                            },
+                        },
+                    },
+                ],
             },
             {
                 test: /\.(ts|tsx)?$/,

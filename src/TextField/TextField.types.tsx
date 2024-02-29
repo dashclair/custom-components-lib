@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import {  ChangeEvent, ReactNode } from "react";
 
 export interface TextFieldProps {
     id: string;
@@ -14,5 +14,5 @@ export interface TextFieldProps {
     select: boolean;
     selectedVal: string;
     onBlur: () => void;
-    onChange: () => void;
+    onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
 }

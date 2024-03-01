@@ -3,8 +3,8 @@ import React from "react";
 import { fireEvent, render } from "@testing-library/react";
 import Button from "./Button";
 
-describe("rendering button", () => {
-    test("button with capitalized text", () => {
+describe("Button", () => {
+    test("should be rendered with capitalized text", () => {
         const { getByRole } = render(<Button>button</Button>);
         const buttonElement = getByRole("button");
 

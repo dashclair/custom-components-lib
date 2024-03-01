@@ -19,9 +19,12 @@ const config: StorybookConfig = {
     },
   },
   webpackFinal: async (config:any) => {
+    
+    const updatedRules = config.module.rules.filter(rule => rule.type!=='asset/resource')
+    
     return {
       ...config,
-      module: { ...config.module, rules: [...config.module.rules, ...custom.module.rules] },
+      module: { ...config.module, rules: [...updatedRules, ...custom.module.rules] },
     };
   },
   docs: {

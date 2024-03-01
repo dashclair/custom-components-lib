@@ -1,4 +1,4 @@
-import {  ChangeEvent, ReactNode } from "react";
+import { ReactNode, ChangeEvent, RefObject } from "react";
 
 export interface TextFieldProps {
     id: string;
@@ -13,6 +13,7 @@ export interface TextFieldProps {
     required: boolean;
     select: boolean;
     selectedVal: string;
+    inputRef: RefObject<HTMLInputElement>;
     onBlur: () => void;
     onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
 }

@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import styles from "./Modal.modules.scss";
 import { ModalProps } from "./Modal.types";
-import CrossIcon from "./CrossIcon";
+import IconComponent from "../Icon/IconComponent";
 
 const Modal = ({
     children,
@@ -46,24 +47,29 @@ const Modal = ({
         }
     };
     return (
-        <dialog
-            ref={modalRef}
-            className={styles.modal}
-            onKeyDown={handleKeyDown}
-        >
-            {hasCloseBtn && (
-                <button
-                    data-testid='modal-button'
-                    className={styles.closeButton}
-                    onClick={handleCloseModal}
+        <>
+            {createPortal(
+                <dialog
+                    ref={modalRef}
+                    className={styles.modal}
+                    onKeyDown={handleKeyDown}
                 >
-                    <CrossIcon className={styles.cross} />
-                </button>
+                    {hasCloseBtn && (
+                        <button
+                            data-testid="modal-button"
+                            className={styles.closeButton}
+                            onClick={handleCloseModal}
+                        >
+                            <IconComponent iconName="cross" />
+                        </button>
+                    )}
+                    <h1 className={styles.title}>{title}</h1>
+                    <p>{text}</p>
+                    {children}
+                </dialog>,
+                document.body
             )}
-            <h1 className={styles.title}>{title}</h1>
-            <p>{text}</p>
-            {children}
-        </dialog>
+        </>
     );
 };
 

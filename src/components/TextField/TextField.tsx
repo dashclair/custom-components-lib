@@ -19,6 +19,7 @@ const TextField = ({
     select,
     onBlur,
     onChange,
+    inputRef,
     ...props
 }: Partial<TextFieldProps>) => {
     const inputStyle = cx("input", className, {
@@ -40,6 +41,7 @@ const TextField = ({
                 required={required}
                 onBlur={onBlur}
                 onChange={onChange}
+                ref={inputRef}
                 {...props}
             ></input>
             <label className={styles.label} htmlFor={id}>

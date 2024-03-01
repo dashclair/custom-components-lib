@@ -3,6 +3,7 @@ import { createPortal } from "react-dom";
 import styles from "./Modal.modules.scss";
 import { ModalProps } from "./Modal.types";
 import IconComponent from "../Icon/IconComponent";
+import useOutsideClick from "../../hooks/useOutsideClick";
 
 const Modal = ({
     children,
@@ -14,6 +15,9 @@ const Modal = ({
 }: ModalProps) => {
     const [isModalOpen, setModalOpen] = useState(isOpen);
     const modalRef = useRef<HTMLDialogElement | null>(null);
+    const divRef = useRef<HTMLDivElement | null>(null);
+
+    useOutsideClick(divRef, () => setModalOpen(false));
 
     useEffect(() => {
         setModalOpen(isOpen);
@@ -47,7 +51,7 @@ const Modal = ({
         }
     };
     return (
-        <>
+        <div ref={divRef}>
             {createPortal(
                 <dialog
                     ref={modalRef}
@@ -69,7 +73,7 @@ const Modal = ({
                 </dialog>,
                 document.body
             )}
-        </>
+        </div>
     );
 };
 

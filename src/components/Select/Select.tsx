@@ -4,7 +4,7 @@ import TextField from "../TextField/TextField";
 import styles from "./Select.module.scss";
 import { SelectProps } from "./Select.types";
 import Button from "../Button/Button";
-import IconComponent from "../components/Icon/IconComponent";
+import IconComponent from "../Icon/IconComponent";
 import cnBind from "classnames/bind";
 
 const cx = cnBind.bind(styles);

@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import styles from "./Modal.modules.scss";
 import { ModalProps } from "./Modal.types";
-import IconComponent from "../components/Icon/IconComponent";
+import IconComponent from "../Icon/IconComponent";
 
 const Modal = ({
     children,

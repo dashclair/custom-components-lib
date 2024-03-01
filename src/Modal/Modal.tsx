@@ -56,6 +56,7 @@ const Modal = ({
                 >
                     {hasCloseBtn && (
                         <button
+                            data-testid="modal-button"
                             className={styles.closeButton}
                             onClick={handleCloseModal}
                         >

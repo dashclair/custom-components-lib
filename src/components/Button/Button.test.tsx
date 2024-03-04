@@ -4,69 +4,66 @@ import { fireEvent, render } from "@testing-library/react";
 import Button from "./Button";
 
 describe("Button", () => {
-    test("should be rendered with capitalized text", () => {
+    it("should be rendered", () => {
         const { getByRole } = render(<Button>button</Button>);
         const buttonElement = getByRole("button");
 
         expect(buttonElement).toBeInTheDocument();
+    });
+
+    it("should be rendered with capitalized text", () => {
+        const { getByRole } = render(<Button>button</Button>);
+        const buttonElement = getByRole("button");
+
         expect(buttonElement).toHaveTextContent("BUTTON");
     });
 
-    test("button with uncapitalized text", () => {
+    it("should be rendered with uncapitalized text", () => {
         const { getByRole } = render(
             <Button capitalized={false}>button</Button>
         );
+
         const buttonElement = getByRole("button");
 
-        expect(buttonElement).toBeInTheDocument();
         expect(buttonElement).toHaveTextContent("button");
     });
 
-    test("with custom props", () => {
-        const onClickMock = jest.fn();
+    it("should be rendered with custom variant and size prop", () => {
         const { getByRole } = render(
-            <Button
-                capitalized={false}
-                variant="outlined"
-                size="small"
-                onClick={onClickMock}
-            >
+            <Button variant="outlined" size="small">
                 Click me
             </Button>
         );
+
         const buttonElement = getByRole("button");
 
-        expect(buttonElement).toBeInTheDocument();
         expect(buttonElement).toHaveClass("button outlined small");
-        expect(buttonElement).toHaveTextContent("Click me");
+    });
+
+    it("should be rendered with checking the onClick", () => {
+        const onClickMock = jest.fn();
+        const { getByRole } = render(
+            <Button onClick={onClickMock}>Click me</Button>
+        );
+        const buttonElement = getByRole("button");
 
         fireEvent.click(buttonElement);
 
         expect(onClickMock).toHaveBeenCalled();
     });
 
-    test("disabled button", () => {
+    it("should be renderd with disabled prop", () => {
         const onClickMock = jest.fn();
         const { getByRole } = render(
-            <Button
-                capitalized
-                variant="contained"
-                size="medium"
-                isDisabled={true}
-                onClick={onClickMock}
-            >
+            <Button isDisabled={true} onClick={onClickMock}>
                 button
             </Button>
         );
         const buttonElement = getByRole("button");
 
-        expect(buttonElement).toBeInTheDocument();
-        expect(buttonElement).toHaveClass("button contained medium");
-        expect(buttonElement).toHaveTextContent("BUTTON");
-        expect(buttonElement).toBeDisabled();
-
         fireEvent.click(buttonElement);
 
+        expect(buttonElement).toBeDisabled();
         expect(onClickMock).not.toHaveBeenCalled();
     });
 });

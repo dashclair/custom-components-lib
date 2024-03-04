@@ -4,7 +4,7 @@ import { fireEvent, render } from "@testing-library/react";
 import Modal from "./Modal";
 
 describe("Modal", () => {
-    test("render modal based on isOpen prop", () => {
+    it("should be rendered", () => {
         const { getByText, getByRole } = render(
             <Modal title={"Title"} text={"test"} isOpen={true} />
         );
@@ -14,7 +14,7 @@ describe("Modal", () => {
         expect(getByText("test")).toBeInTheDocument();
     });
 
-    test("click the button", () => {
+    it("should check the button has been clicked", () => {
         const handleClose = jest.fn();
         const { getByTestId } = render(
             <Modal
@@ -26,6 +26,7 @@ describe("Modal", () => {
             />
         );
         const buttonElement = getByTestId("modal-button");
+
         fireEvent.click(buttonElement);
 
         expect(handleClose).toHaveBeenCalledTimes(1);

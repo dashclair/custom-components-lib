@@ -72,6 +72,7 @@ const Select = ({
         <div id="select" className={styles.select}>
             <div className={styles.selectContainer}>
                 <TextField
+                    role="combobox"
                     inputRef={inputRef}
                     onChange={handleSelectChange}
                     value={selectedItem}

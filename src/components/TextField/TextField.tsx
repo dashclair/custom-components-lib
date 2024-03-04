@@ -20,6 +20,7 @@ const TextField = ({
     onBlur,
     onChange,
     inputRef,
+    role,
     ...props
 }: Partial<TextFieldProps>) => {
     const inputStyle = cx("input", className, {
@@ -32,6 +33,7 @@ const TextField = ({
     return (
         <div className={`${styles.containerInput}`}>
             <input
+            role={role}
                 className={inputStyle}
                 value={value}
                 id={id}

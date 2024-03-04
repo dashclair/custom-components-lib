@@ -3,8 +3,8 @@ import React from "react";
 import { fireEvent, render } from "@testing-library/react";
 import Checkbox from "./Checkbox";
 
-describe("checkbox", () => {
-    test("with default props", () => {
+describe("Checkbox", () => {
+    it("should be rendered with default props", () => {
         const onChangeMock = jest.fn();
         const { getByLabelText } = render(
             <Checkbox label="label" onChange={onChangeMock} />
@@ -12,30 +12,39 @@ describe("checkbox", () => {
         const checkboxElement = getByLabelText("label");
 
         expect(checkboxElement).toBeInTheDocument();
-        expect(checkboxElement).not.toBeChecked();
-        expect(checkboxElement).not.toBeDisabled();
+    });
+
+    it("should be checked", () => {
+        const onChangeMock = jest.fn();
+        const { getByLabelText } = render(
+            <Checkbox label="label" onChange={onChangeMock} value={true} />
+        );
+        const checkboxElement = getByLabelText("label");
+
+        expect(checkboxElement).toBeChecked();
 
         fireEvent.click(checkboxElement);
 
         expect(onChangeMock).toHaveBeenCalled();
     });
 
-    test("with custom props", () => {
+    it("should be disabled", () => {
         const onChangeMock = jest.fn();
         const { getByLabelText } = render(
-            <Checkbox
-                label="label"
-                value={true}
-                disabled={true}
-                size="large"
-                onChange={onChangeMock}
-            />
+            <Checkbox label="label" disabled={true} onChange={onChangeMock} />
         );
         const checkboxElement = getByLabelText("label");
 
-        expect(checkboxElement).toBeInTheDocument();
-        expect(checkboxElement).toBeChecked();
-        expect(checkboxElement).toHaveClass("input large");
         expect(checkboxElement).toBeDisabled();
+    });
+
+    it("should be rendered with custom size prop", () => {
+        const onChangeMock = jest.fn();
+        const { getByLabelText } = render(
+            <Checkbox label="label" size="large" onChange={onChangeMock} />
+        );
+        const checkboxElement = getByLabelText("label");
+
+        expect(checkboxElement).toHaveClass("input large");
     });
 });

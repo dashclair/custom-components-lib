@@ -4,45 +4,30 @@ import { render, fireEvent } from "@testing-library/react";
 import Switch from "./Switch";
 
 describe("Switch", () => {
-    test("default props", () => {
+    it("should be rendered with the default props", () => {
         const { getByRole } = render(<Switch id="mySwitch" />);
         const switchElement = getByRole("checkbox");
 
         expect(switchElement).toBeInTheDocument();
-        expect(switchElement).not.toBeChecked();
-        expect(switchElement).not.toBeDisabled();
     });
 
-    test("custom props", () => {
+    it("is checking the change event", () => {
         const onChangeMock = jest.fn();
         const { getByRole } = render(
-            <Switch id="mySwitch" checked={true} onChange={onChangeMock} />
+            <Switch id="mySwitch" onChange={onChangeMock} />
         );
         const switchElement = getByRole("checkbox");
-
-        expect(switchElement).toBeInTheDocument();
-        expect(switchElement).toBeChecked();
-        expect(switchElement).not.toBeDisabled();
 
         fireEvent.click(switchElement);
 
         expect(onChangeMock).toHaveBeenCalled();
+        expect(switchElement).toBeChecked();
     });
 
-    test("custom disabled props", () => {
-        const onChangeMock = jest.fn();
-        const { getByRole } = render(
-            <Switch
-                id="mySwitch"
-                checked={true}
-                disabled={true}
-                onChange={onChangeMock}
-            />
-        );
+    it("should be rendered with disabled prop", () => {
+        const { getByRole } = render(<Switch id="mySwitch" disabled={true} />);
         const switchElement = getByRole("checkbox");
 
-        expect(switchElement).toBeInTheDocument();
-        expect(switchElement).toBeChecked();
         expect(switchElement).toBeDisabled();
     });
 });

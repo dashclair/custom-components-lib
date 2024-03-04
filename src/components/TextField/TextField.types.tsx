@@ -2,6 +2,7 @@ import { ReactNode, ChangeEvent, RefObject } from "react";
 
 export interface TextFieldProps {
     id: string;
+    role: string;
     children: ReactNode | string;
     variant: "outlined" | "filled" | "standart";
     label: string;

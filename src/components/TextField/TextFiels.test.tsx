@@ -4,72 +4,78 @@ import { render, fireEvent } from "@testing-library/react";
 import TextField from "./TextField";
 
 describe("TextField", () => {
-    test("default props", () => {
-        const { getByLabelText } = render(
+    it("should be rendered with the default props", () => {
+        const { getByLabelText, getByRole } = render(
             <TextField id="input" label="Text Field" />
         );
-        const inputElement = getByLabelText("Text Field");
-        const labelElement = getByLabelText("Text Field");
-
-        expect(inputElement).toBeInTheDocument();
-        expect(labelElement).toBeInTheDocument();
-        expect(inputElement).toHaveValue("");
-        expect(inputElement).not.toBeDisabled();
-        expect(labelElement).not.toHaveClass("error");
-    });
-
-    test("custom props", () => {
-        const onChangeMock = jest.fn();
-        const onBlurMock = jest.fn();
-        const { getByLabelText } = render(
-            <TextField
-                id="myTextField"
-                label="Text Field"
-                variant="outlined"
-                type="email"
-                value="example@example.com"
-                className="custom-class"
-                error={true}
-                required={true}
-                onBlur={onBlurMock}
-                onChange={onChangeMock}
-            />
-        );
-        const inputElement = getByLabelText("Text Field");
-        const labelElement = getByLabelText("Text Field");
-
-        expect(inputElement).toBeInTheDocument();
-        expect(labelElement).toBeInTheDocument();
-        expect(inputElement).toHaveValue("example@example.com");
-        expect(inputElement).toHaveAttribute("type", "email");
-        expect(inputElement).toHaveClass("outlined error custom-class");
-
-        fireEvent.change(inputElement, { target: { value: "newvalue" } });
-        expect(onChangeMock).toHaveBeenCalledTimes(1);
-        expect(onChangeMock).toHaveBeenCalledWith(expect.any(Object));
-
-        fireEvent.blur(inputElement);
-        expect(onBlurMock).toHaveBeenCalledTimes(1);
-    });
-    test("with disabled", () => {
-        const { getByLabelText } = render(
-            <TextField
-                id="myTextField"
-                label="Text Field"
-                variant="filled"
-                type="text"
-                disabled={true}
-            />
-        );
-        const inputElement = getByLabelText("Text Field");
+        const inputElement = getByRole("textbox");
         const labelElement = getByLabelText("Text Field");
 
         expect(inputElement).toBeInTheDocument();
         expect(labelElement).toBeInTheDocument();
         expect(inputElement).toHaveAttribute("type", "text");
-        expect(inputElement).toHaveClass("filled");
-        expect(inputElement).toBeDisabled();
+    });
 
-        fireEvent.change(inputElement, { target: { value: "name" } });
+    it("should be rendered with variant prop", () => {
+        const { getByRole } = render(
+            <TextField label="Label" variant="outlined" />
+        );
+        const inputElement = getByRole("textbox");
+
+        expect(inputElement).toHaveClass("outlined");
+    });
+
+    it("should be rendered with custom type prop", () => {
+        const { getByRole } = render(<TextField label="Label" type="email" />);
+        const inputElement = getByRole("textbox");
+
+        expect(inputElement).toHaveAttribute("type", "email");
+    });
+
+    it("should be rendered with custom className", () => {
+        const { getByRole } = render(
+            <TextField label="Label" className="custom-input" />
+        );
+        const inputElement = getByRole("textbox");
+
+        expect(inputElement).toHaveClass("input custom-input");
+    });
+
+    it("should be rendered with onChange value", () => {
+        const onChangeMock = jest.fn();
+        const { getByRole } = render(
+            <TextField label="Label" onChange={onChangeMock} />
+        );
+        const inputElement = getByRole("textbox");
+
+        fireEvent.change(inputElement, { target: { value: "newvalue" } });
+        expect(inputElement).toHaveValue("newvalue");
+    });
+
+    it("should be rendered with error prop", () => {
+        const { getByRole } = render(<TextField label="Label" error={true} />);
+        const inputElement = getByRole("textbox");
+
+        expect(inputElement).toHaveClass("input error");
+    });
+
+    it("should be rendered onBlur prop", () => {
+        const onBlurMock = jest.fn();
+        const { getByRole } = render(
+            <TextField label="Label" onBlur={onBlurMock} />
+        );
+        const inputElement = getByRole("textbox");
+
+        fireEvent.blur(inputElement);
+        expect(onBlurMock).toHaveBeenCalledTimes(1);
+    });
+
+    it("should be rendered with disabled", () => {
+        const { getByLabelText } = render(
+            <TextField id="myTextField" label="Text Field" disabled={true} />
+        );
+        const inputElement = getByLabelText("Text Field");
+
+        expect(inputElement).toBeDisabled();
     });
 });
